@@ -1,0 +1,27 @@
+name: Build site
+# Regenerates all static pages + images from tools/ whenever sources change.
+on:
+  push:
+    branches: [main]
+    paths: ['tools/**', 'assets/**', 'data/**', '.github/workflows/build.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: { group: build, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pillow
+      - run: python3 tools/make_images.py && python3 tools/build.py
+      - name: Commit generated site
+        run: |
+          git config user.name "aimoff-build-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Build: regenerate static pages"
+          git push origin HEAD:main
+          git push -f origin HEAD:gh-pages

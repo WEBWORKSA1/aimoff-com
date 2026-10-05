@@ -29,6 +29,8 @@ NAV = [
     ('contests.html', 'Contests'),
 ]
 
+LIQ = object()  # sentinel: render Liquid placeholders instead of values
+
 def rel(depth):
     return '../' * depth
 
@@ -39,7 +41,7 @@ def nav_html(active, d):
             items = ''.join(f'<a href="{rel(d)}{h}">{t}</a>' for h, t in label)
             out.append(f'<li class="dd"><button aria-haspopup="true">{href} ▾</button><div class="dd-menu">{items}</div></li>')
         else:
-            cls = ' class="active"' if href == active else ''
+            cls = (' class="active"' if href == active else '') if active != LIQ else f"{{% if page.active == '{href}' %}} class=\"active\"{{% endif %}}"
             out.append(f'<li><a href="{rel(d)}{href}"{cls}>{label}</a></li>')
     out.append(f'<li><a href="{rel(d)}support.html">❤ Support</a></li>')
     return ''.join(out)
@@ -48,8 +50,9 @@ LOGO = ('<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><cir
         '<circle cx="16" cy="16" r="6" fill="none" stroke="#22e3c4" stroke-width="2.5"/><circle cx="21" cy="12" r="2.6" fill="#ff4d6d"/>'
         '<path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2.5"/></svg>')
 
-def head(title, desc, path, d, extra_schema=None, noindex=False):
+def head(title, desc, path, d, extra_schema=None, noindex=False, liquid=False):
     canon = f'{SITE}/{path}' if path != 'index.html' else f'{SITE}/'
+    if liquid: canon = '{{ page.canon }}'
     ads = (f'<meta name="google-adsense-account" content="{ADSENSE_CLIENT}">\n'
            f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>') if ADSENSE_CLIENT else ''
     ga = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>'
@@ -60,6 +63,8 @@ def head(title, desc, path, d, extra_schema=None, noindex=False):
     }, {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'AimOff.com', 'url': SITE + '/', 'logo': SITE + '/assets/img/icon-512.png'}]
     if extra_schema: schema.extend(extra_schema)
     robots = '<meta name="robots" content="noindex">' if noindex else '<meta name="robots" content="index,follow,max-image-preview:large">'
+    schema_json = json.dumps(schema)
+    if liquid: robots, schema_json = '{{ page.robots }}', '{{ page.schema }}'
     return f'''<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
@@ -80,7 +85,7 @@ def head(title, desc, path, d, extra_schema=None, noindex=False):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{rel(d)}assets/css/style.css">
-<script type="application/ld+json">{json.dumps(schema)}</script>
+<script type="application/ld+json">{schema_json}</script>
 {ads}{ga}
 </head>'''
 
@@ -132,19 +137,78 @@ def footer(d):
 <div class="field"><select name="main_game" aria-label="Main game"><option>Valorant</option><option>Counter-Strike 2</option><option>Apex Legends</option><option>Fortnite</option><option>Overwatch 2</option><option>Call of Duty</option><option>Other</option></select></div>
 <button class="btn btn-primary btn-block" type="submit">Send me the plan</button><div class="form-msg" role="status"></div></form></div></div>'''
 
-def page(path, title, desc, body, active='', scripts=(), schema=None, noindex=False, sticky=True):
+def render(path, title, desc, body, active='', scripts=(), schema=None, noindex=False, sticky=True, liquid=False):
     d = path.count('/')
     r = rel(d)
     sc = ''.join(f'<script src="{r}assets/js/{s}" defer></script>' for s in scripts)
-    stick = (f'<div class="sticky-cta"><a class="btn btn-primary btn-sm" href="{r}coaching.html">🎯 Free Aim Assessment</a></div>') if sticky else ''
-    html = (head(title, desc, path, d, schema, noindex) + '\n<body>\n' + header(active, d) +
+    stick = (f'<div class="sticky-cta"><a class="btn btn-primary btn-sm" href="{r}coaching.html">\U0001f3af Free Aim Assessment</a></div>') if sticky else ''
+    if liquid:
+        title, desc, sc, stick, body, active = '{{ page.title }}', '{{ page.description }}', '{{ page.scripts }}', '{{ page.sticky }}', '{{ content }}', LIQ
+    parts = dict(sc=sc, stick=stick)
+    html = (head(title, desc, path, d, schema, noindex, liquid) + '\n<body>\n' + header(active, d) +
             f'\n<main id="main">\n{body.replace("{R}", r)}\n</main>\n' + footer(d) + stick +
             f'\n<script src="{r}assets/js/main.js" defer></script>{sc}\n</body></html>\n')
+    return html, parts
+
+def page(path, title, desc, body, active='', scripts=(), schema=None, noindex=False, sticky=True):
+    html, _ = render(path, title, desc, body, active, scripts, schema, noindex, sticky)
     out = os.path.join(ROOT, path)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, 'w', encoding='utf-8') as f:
         f.write(html)
     return path
+
+def yaml_block(k, v):
+    return f'{k}: |-\n' + ''.join('  ' + line + '\n' for line in v.split('\n'))
+
+def jekyll_main_pages():
+    """Rewrite every top-level page as front matter + body over shared layouts (_layouts/default*.html),
+    so the header/footer live in one place. GitHub Pages' Jekyll renders them to identical HTML."""
+    os.makedirs(os.path.join(ROOT, '_layouts'), exist_ok=True)
+    for d in (0, 1):
+        lay, _ = render('x/' * d + 'x.html', '', '', '', liquid=True)
+        open(os.path.join(ROOT, '_layouts', f'default{d}.html'), 'w', encoding='utf-8').write(lay)
+    pages = list(P.PAGES) + [p for p in P.conversion_pages() if p['path'] == 'convert/index.html']
+    for p in pages:
+        d = p['path'].count('/')
+        html, parts = render(**p)
+        canon = f"{SITE}/{p['path']}" if p['path'] != 'index.html' else f'{SITE}/'
+        schema = [json.loads(html.split('<script type="application/ld+json">')[1].split('</script>')[0])][0]
+        robots = '<meta name="robots" content="noindex">' if p.get('noindex') else '<meta name="robots" content="index,follow,max-image-preview:large">'
+        fm = ('---\n' + f'layout: default{d}\n' + yaml_block('title', p['title']) + yaml_block('description', p['desc']) +
+              yaml_block('canon', canon) + yaml_block('robots', robots) + yaml_block('schema', json.dumps(schema)) +
+              yaml_block('active', p.get('active', '') or '-') + yaml_block('scripts', parts['sc'] or '') + yaml_block('sticky', parts['stick'] or '') + '---\n')
+        body = p['body'].replace('{R}', rel(d))
+        assert '{{' not in body and '{%' not in body, p['path']
+        with open(os.path.join(ROOT, p['path']), 'w', encoding='utf-8') as f:
+            f.write(fm + body)
+
+def jekyll_convert_pages():
+    """Replace the 72 generated conversion pages with tiny Jekyll stubs + one shared layout.
+    GitHub Pages' built-in Jekyll renders them to the identical HTML, keeping the repo small."""
+    tpl = P.conv_page('x', 'y', P.LIQUID)
+    tpl['path'] = 'convert/{{ page.a }}-to-{{ page.b }}-sensitivity.html'
+    out = page(**tpl)
+    os.makedirs(os.path.join(ROOT, '_layouts'), exist_ok=True)
+    os.replace(os.path.join(ROOT, out), os.path.join(ROOT, '_layouts', 'convert.html'))
+    for a in P.GAMES:
+        for b in P.GAMES:
+            if a == b or 'csgo' in (a, b):
+                continue
+            v = P.conv_values(a, b)
+            fm = '---\nlayout: convert\n' + ''.join(f"{k}: '{v[k]}'\n" for k in ['a', 'b', 'na', 'nb', 'ya', 'yb', 'm', 'nbplus', 'rows']) + '---\n'
+            with open(os.path.join(ROOT, 'convert', f'{a}-to-{b}-sensitivity.html'), 'w', encoding='utf-8') as f:
+                f.write(fm)
+
+SITEMAP = """---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in site.html_pages %}{% unless p.url contains '404' %}
+<url><loc>https://aimoff.com{{ p.url }}</loc><lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod></url>{% endunless %}{% endfor %}
+</urlset>
+"""
 
 def main():
     built = []
@@ -152,15 +216,10 @@ def main():
         built.append(page(**p))
     for p in P.conversion_pages():
         built.append(page(**p))
-    today = datetime.date.today().isoformat()
-    urls = [u for u in built if u != '404.html']
-    sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for u in urls:
-        loc = SITE + '/' + ('' if u == 'index.html' else u)
-        pr = '1.0' if u == 'index.html' else ('0.6' if u.startswith('convert/') else '0.8')
-        sm.append(f'<url><loc>{loc}</loc><lastmod>{today}</lastmod><priority>{pr}</priority></url>')
-    sm.append('</urlset>')
-    open(os.path.join(ROOT, 'sitemap.xml'), 'w').write('\n'.join(sm) + '\n')
+    jekyll_convert_pages()
+    jekyll_main_pages()
+    # sitemap.xml is rendered by GitHub Pages' Jekyll from every page that has front matter
+    open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(SITEMAP)
     print(f'Built {len(built)} pages')
 
 if __name__ == '__main__':
