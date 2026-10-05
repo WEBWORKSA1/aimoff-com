@@ -1,0 +1,47 @@
+---
+layout: default0
+title: |-
+  Sensitivity Converter — Valorant, CS2, Apex, OW2, CoD, Fortnite | AimOff
+description: |-
+  Convert mouse sensitivity between 10 games with exact cm/360. Includes eDPI, inches/360 and a multiplier. Valorant, CS2, Apex, Overwatch 2, Call of Duty, Fortnite and more.
+canon: |-
+  https://aimoff.com/sensitivity-converter.html
+robots: |-
+  <meta name="robots" content="index,follow,max-image-preview:large">
+schema: |-
+  [{"@context": "https://schema.org", "@type": "WebSite", "name": "AimOff", "url": "https://aimoff.com/", "potentialAction": {"@type": "SearchAction", "target": "https://aimoff.com/guides.html?q={search_term_string}", "query-input": "required name=search_term_string"}}, {"@context": "https://schema.org", "@type": "Organization", "name": "AimOff.com", "url": "https://aimoff.com/", "logo": "https://aimoff.com/assets/img/icon-512.png"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How does the sensitivity converter work?", "acceptedAnswer": {"@type": "Answer", "text": "Each game turns your view by a fixed angle per mouse count (its “yaw”), multiplied by your sensitivity. We match the degrees turned per centimetre of mouse movement between the two games, so your muscle memory transfers 1:1."}}, {"@type": "Question", "name": "What is cm/360?", "acceptedAnswer": {"@type": "Answer", "text": "The distance in centimetres you move your mouse to turn 360° in game. It is the only fully game-independent way to compare sensitivity."}}, {"@type": "Question", "name": "What is eDPI?", "acceptedAnswer": {"@type": "Answer", "text": "Effective DPI = in-game sensitivity × mouse DPI. It compares players in the same game only, because yaw differs between games."}}, {"@type": "Question", "name": "Does FOV change my sensitivity?", "acceptedAnswer": {"@type": "Answer", "text": "Hip-fire 360° distance does not change with FOV in most games, but how fast the screen appears to move does. For scoped aim, use the game’s ADS multiplier setting."}}]}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "Sensitivity Converter", "url": "https://aimoff.com/sensitivity-converter.html", "applicationCategory": "GameApplication", "operatingSystem": "Any (web browser)", "description": "Game sensitivity converter", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}]
+active: |-
+  -
+scripts: |-
+  <script src="assets/js/tools.js" defer></script>
+sticky: |-
+  <div class="sticky-cta"><a class="btn btn-primary btn-sm" href="coaching.html">🎯 Free Aim Assessment</a></div>
+---
+<section class="page-hero"><div class="container"><span class="eyebrow">10 games · cm/360 accurate</span><h1>Sensitivity Converter</h1>
+<p>Convert your mouse sensitivity between Valorant, CS2, Apex Legends, Overwatch 2, Call of Duty, Fortnite and more. It keeps your exact cm/360, so your aim feels identical.</p></div></section>
+<section><div class="container layout"><div><div class="tool" id="conv" data-from="cs2" data-to="valorant">
+<div class="grid g2"><div><h3>From</h3>
+<div class="field"><label for="from-game">Game</label><select id="from-game"></select></div>
+<div class="field" id="from-yaw-wrap" hidden><label for="from-yaw">Custom yaw (°/count)</label><input id="from-yaw" type="number" step="any" value="0.022"></div>
+<div class="row"><div class="field"><label for="from-sens">Sensitivity</label><input id="from-sens" type="number" step="any" value="1.2"></div>
+<div class="field"><label for="from-dpi">DPI</label><input id="from-dpi" type="number" value="800"></div></div></div>
+<div><h3>To <button class="btn btn-secondary btn-sm" id="swap" type="button" style="float:right">⇄ Swap</button></h3>
+<div class="field"><label for="to-game">Game</label><select id="to-game"></select></div>
+<div class="field" id="to-yaw-wrap" hidden><label for="to-yaw">Custom yaw (°/count)</label><input id="to-yaw" type="number" step="any" value="0.022"></div>
+<div class="field"><label for="to-dpi">DPI (leave equal unless changing mouse DPI)</label><input id="to-dpi" type="number" value="800"></div>
+<div class="out"><span class="muted small">Your new sensitivity</span><br><b id="to-sens">—</b></div></div></div>
+<div class="hud"><div><b id="o-cm">—</b><span>cm / 360°</span></div><div><b id="o-in">—</b><span>inches / 360°</span></div><div><b id="o-edpi">—</b><span>eDPI (source)</span></div><div><b id="o-mult">—</b><span>Multiplier</span></div></div>
+<p class="muted small" id="o-style"></p>
+<p class="small muted">Values use public hip-fire yaw constants (degrees per mouse count). Scoped/ADS multipliers differ per game, so check in-game. Fortnite uses the X/Y percentage scale.</p></div><div class="ad-slot" data-slot="">Advertisement</div>
+<div class="prose"><h2>Popular conversions</h2><div class="chips" style="margin-bottom:16px"><a class="tag" style="padding:8px 12px" href="convert/cs2-to-valorant-sensitivity.html">Counter-Strike 2 → Valorant</a><a class="tag" style="padding:8px 12px" href="convert/valorant-to-cs2-sensitivity.html">Valorant → Counter-Strike 2</a><a class="tag" style="padding:8px 12px" href="convert/apex-to-valorant-sensitivity.html">Apex Legends → Valorant</a><a class="tag" style="padding:8px 12px" href="convert/valorant-to-apex-sensitivity.html">Valorant → Apex Legends</a><a class="tag" style="padding:8px 12px" href="convert/fortnite-to-valorant-sensitivity.html">Fortnite → Valorant</a><a class="tag" style="padding:8px 12px" href="convert/valorant-to-fortnite-sensitivity.html">Valorant → Fortnite</a><a class="tag" style="padding:8px 12px" href="convert/overwatch2-to-valorant-sensitivity.html">Overwatch 2 → Valorant</a><a class="tag" style="padding:8px 12px" href="convert/cod-to-valorant-sensitivity.html">Call of Duty → Valorant</a><a class="tag" style="padding:8px 12px" href="convert/cs2-to-apex-sensitivity.html">Counter-Strike 2 → Apex Legends</a><a class="tag" style="padding:8px 12px" href="convert/apex-to-cod-sensitivity.html">Apex Legends → Call of Duty</a><a class="tag" style="padding:8px 12px" href="convert/fortnite-to-cs2-sensitivity.html">Fortnite → Counter-Strike 2</a><a class="tag" style="padding:8px 12px" href="convert/overwatch2-to-cs2-sensitivity.html">Overwatch 2 → Counter-Strike 2</a></div>
+<p><a href="convert/index.html">See all 72 game-to-game conversion pages →</a></p>
+<h2>Typical cm/360 ranges</h2><div class="table-wrap"><table><thead><tr><th>Game type</th><th>Common range</th><th>Why</th></tr></thead><tbody>
+<tr><td>Tactical shooters (Valorant, CS2)</td><td>35–60 cm</td><td>Precise one-taps; little need for 180° turns</td></tr>
+<tr><td>Battle royale (Apex, Fortnite, Warzone)</td><td>25–40 cm</td><td>Mix of tracking and fast turns</td></tr>
+<tr><td>Hero shooters (Overwatch 2)</td><td>20–35 cm</td><td>Fast movement and vertical fights</td></tr>
+<tr><td>Arena (Quake)</td><td>25–45 cm</td><td>Heavy tracking at high speed</td></tr></tbody></table></div>
+<p class="muted small">These are community-typical ranges, not rules. Find your own with the 3-step method in our <a href="guides.html#sensitivity">sensitivity guide</a>.</p>
+<h2>FAQ</h2><details><summary>How does the sensitivity converter work?</summary><p>Each game turns your view by a fixed angle per mouse count (its “yaw”), multiplied by your sensitivity. We match the degrees turned per centimetre of mouse movement between the two games, so your muscle memory transfers 1:1.</p></details><details><summary>What is cm/360?</summary><p>The distance in centimetres you move your mouse to turn 360° in game. It is the only fully game-independent way to compare sensitivity.</p></details><details><summary>What is eDPI?</summary><p>Effective DPI = in-game sensitivity × mouse DPI. It compares players in the same game only, because yaw differs between games.</p></details><details><summary>Does FOV change my sensitivity?</summary><p>Hip-fire 360° distance does not change with FOV in most games, but how fast the screen appears to move does. For scoped aim, use the game’s ADS multiplier setting.</p></details></div></div>
+<aside class="sidebar"><div class="ad-slot" data-slot="" style="min-height:250px">Advertisement</div><div class="card"><h3>Test your new sens</h3><p class="muted small">Run 3 Tracking sessions to lock it in.</p><a class="btn btn-primary btn-block" href="train.html?mode=tracking">Open trainer</a></div>
+<div class="card"><h3>Gear brands</h3><p class="muted small">Sponsor this converter. It is one of our most-used tools.</p><a class="btn btn-secondary btn-block" href="advertise.html">Sponsorship info</a></div></aside>
+</div></section>

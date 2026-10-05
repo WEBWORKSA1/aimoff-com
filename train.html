@@ -1,0 +1,63 @@
+---
+layout: default0
+title: |-
+  Free Aim Trainer Online — Gridshot, Flick, Tracking, Reflex | AimOff
+description: |-
+  Play a free browser aim trainer with 5 modes: Gridshot, Flick, Tracking, Reflex and Precision. Tiers, personal bests, history, and monthly contests. No download.
+canon: |-
+  https://aimoff.com/train.html
+robots: |-
+  <meta name="robots" content="index,follow,max-image-preview:large">
+schema: |-
+  [{"@context": "https://schema.org", "@type": "WebSite", "name": "AimOff", "url": "https://aimoff.com/", "potentialAction": {"@type": "SearchAction", "target": "https://aimoff.com/guides.html?q={search_term_string}", "query-input": "required name=search_term_string"}}, {"@context": "https://schema.org", "@type": "Organization", "name": "AimOff.com", "url": "https://aimoff.com/", "logo": "https://aimoff.com/assets/img/icon-512.png"}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "AimOff Aim Trainer", "url": "https://aimoff.com/train.html", "applicationCategory": "GameApplication", "operatingSystem": "Any (web browser)", "description": "Free 5-mode browser aim trainer", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}]
+active: |-
+  train.html
+scripts: |-
+  <script src="assets/js/trainer.js" defer></script>
+sticky: |-
+  <div class="sticky-cta"><a class="btn btn-primary btn-sm" href="coaching.html">🎯 Free Aim Assessment</a></div>
+---
+<section class="page-hero"><div class="container"><span class="eyebrow">Free aim trainer · no download</span>
+<h1>Aim Trainer</h1><p>Five drills that build the core aiming skills used in every shooter: speed (Gridshot), snapping (Flick), smoothness (Tracking), reaction (Reflex) and control (Precision). Press <kbd>Space</kbd> to start and <kbd>Esc</kbd> to stop.</p></div></section>
+<section><div class="container layout"><div>
+<div class="tool">
+<div class="toolbar">
+<div class="seg" id="seg-mode"><button class="on" data-v="gridshot">Gridshot</button><button data-v="flick">Flick</button><button data-v="tracking">Tracking</button><button data-v="reflex">Reflex</button><button data-v="precision">Precision</button></div>
+<div class="seg" id="seg-dur"><button data-v="30">30s</button><button class="on" data-v="60">60s</button></div>
+<div class="seg" id="seg-size"><button data-v="0.75">S</button><button class="on" data-v="1">M</button><button data-v="1.3">L</button></div>
+<label class="small" style="display:flex;align-items:center;gap:6px;margin:0">Crosshair <input id="xhair" type="color" value="#22e3c4" style="width:44px;padding:2px;height:34px"></label>
+</div>
+<div class="arena"><canvas id="arena" aria-label="Aim trainer arena"></canvas><div class="overlay" id="overlay"></div></div>
+<div class="hud"><div><b id="h-score">0</b><span>Score</span></div><div><b id="h-time">0.0</b><span>Time left</span></div><div><b id="h-hits">0</b><span>Hits</span></div><div><b id="h-acc">0%</b><span>Accuracy</span></div><div><b id="h-pb">0</b><span>Personal best</span></div></div>
+</div>
+<div class="ad-slot" data-slot="">Advertisement</div>
+<h2>Your personal bests</h2><div class="hud" id="pbs"></div>
+<h3>Recent sessions</h3><div class="table-wrap"><table><thead><tr><th>Mode</th><th>Score</th><th>Accuracy</th><th>Length</th><th>Date</th></tr></thead><tbody id="history"></tbody></table></div>
+<div class="prose mt">
+<h2>How each mode trains you</h2>
+<ul><li><b>Gridshot</b> builds raw speed and target acquisition: three targets on a grid, cleared as fast as you can.</li>
+<li><b>Flick</b> trains fast, accurate snaps to a single random target. Watch your average time-to-kill drop.</li>
+<li><b>Tracking</b> trains smooth, continuous aim on a target that changes direction. It is scored by the share of time your crosshair stays on it.</li>
+<li><b>Reflex</b> combines reaction and precision: targets shrink and disappear if you are too slow.</li>
+<li><b>Precision</b> uses tiny targets that punish overflicking. Slow down and be accurate first.</li></ul>
+<h2>Tiers</h2><p>Every run is ranked from <b>Rookie → Bronze → Silver → Gold → Platinum → Diamond → Master → Legend</b>. Scores are normalised to a 60-second run, so 30s and 60s results are comparable.</p>
+<div class="callout">Tip: browser trainers use your desktop cursor, so turn off Windows “Enhance pointer precision” for consistent results. See <a href="guides.html#setup">setup guide</a>.</div>
+</div></div>
+<aside class="sidebar"><div class="card"><h3>Enter the AimOff Open</h3><p class="muted small">Post your best 60s Gridshot score and you could win this month’s prize.</p><a class="btn btn-gold btn-block" href="contests.html">Contest details</a></div>
+<div class="ad-slot" data-slot="" style="min-height:250px">Advertisement</div>
+<div class="card"><h3>Plateaued?</h3><p class="muted small">Get a free coach review of your scores and setup.</p><a class="btn btn-primary btn-block" href="coaching.html">Free assessment</a></div></aside>
+</div></section>
+<section class="section"><div class="container"><div class="lead-box split reveal">
+<div><span class="eyebrow">Free · 15 minutes · No commitment</span><h2>Stuck at the same rank? Get a free aim assessment.</h2>
+<ul class="checks"><li>A coach reviews your scores, sensitivity and setup</li><li>You get a written 3-point fix list within 48 hours</li><li>Matched to coaches for Valorant, CS2, Apex, Fortnite, OW2 and CoD</li><li>Pay nothing unless you choose to book sessions</li></ul>
+<a class="btn btn-secondary" href="coaching.html">See how coaching works →</a></div>
+<form class="card js-form" data-subject="Lead: Free aim assessment (quick form)" data-success="Request received! A coach will email you within 48 hours.">
+<input class="hp" name="_honey" tabindex="-1" autocomplete="off"><input type="hidden" name="form" value="quick-assessment">
+<h3>Claim your free assessment</h3>
+<div class="row"><div class="field"><label for="qa-n">Name</label><input id="qa-n" name="name" required></div>
+<div class="field"><label for="qa-e">Email</label><input id="qa-e" type="email" name="email" required></div></div>
+<div class="row"><div class="field"><label for="qa-g">Main game</label><select id="qa-g" name="game" required><option value="">Choose…</option><option>Valorant</option><option>Counter-Strike 2</option><option>Apex Legends</option><option>Fortnite</option><option>Overwatch 2</option><option>Call of Duty</option><option>Other</option></select></div>
+<div class="field"><label for="qa-r">Current rank</label><input id="qa-r" name="rank" placeholder="e.g. Gold 2"></div></div>
+<label class="check"><input type="checkbox" name="consent" value="yes" required> I agree to be contacted about coaching. Unsubscribe anytime.</label>
+<button class="btn btn-primary btn-block mt" type="submit">Get my free assessment</button><div class="form-msg" role="status"></div></form>
+</div></div></section>
