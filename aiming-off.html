@@ -1,0 +1,61 @@
+---
+layout: default0
+title: |-
+  Aiming Off: Navigation Technique Explained + Calculator | AimOff
+description: |-
+  What aiming off means in orienteering and navigation, why it works, how many degrees to use, with a free aiming-off calculator, diagram, videos and FAQ.
+canon: |-
+  https://aimoff.com/aiming-off.html
+robots: |-
+  <meta name="robots" content="index,follow,max-image-preview:large">
+schema: |-
+  [{"@context": "https://schema.org", "@type": "WebSite", "name": "AimOff", "url": "https://aimoff.com/", "potentialAction": {"@type": "SearchAction", "target": "https://aimoff.com/guides.html?q={search_term_string}", "query-input": "required name=search_term_string"}}, {"@context": "https://schema.org", "@type": "Organization", "name": "AimOff.com", "url": "https://aimoff.com/", "logo": "https://aimoff.com/assets/img/icon-512.png"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is aiming off in orienteering?", "acceptedAnswer": {"@type": "Answer", "text": "Aiming off means deliberately setting your bearing a few degrees to one side of a target that sits on a line feature, such as a path junction on a stream. When you reach the line feature you know which way to turn, instead of guessing."}}, {"@type": "Question", "name": "How many degrees should I aim off?", "acceptedAnswer": {"@type": "Answer", "text": "More than your expected compass error. Most walkers and runners have ±3–7° of error, so 8–10° works well. The calculator shows the sideways offset this creates over your leg distance."}}, {"@type": "Question", "name": "Is aiming off the same as an attack point?", "acceptedAnswer": {"@type": "Answer", "text": "No. An attack point is an easy-to-find feature near the control that you navigate to first. A catching feature stops you if you overshoot. Aiming off works with a line feature you know you will hit."}}, {"@type": "Question", "name": "Does aiming off apply to shooting and archery?", "acceptedAnswer": {"@type": "Answer", "text": "The phrase is also used for deliberately aiming to one side of a target to allow for wind or for a moving target. The principle is the same: plan for error instead of hoping it will not happen."}}]}]
+active: |-
+  aiming-off.html
+scripts: |-
+  <script src="assets/js/tools.js" defer></script>
+sticky: |-
+  <div class="sticky-cta"><a class="btn btn-primary btn-sm" href="coaching.html">🎯 Free Aim Assessment</a></div>
+---
+<section class="page-hero"><div class="container"><span class="eyebrow">The idea behind our name</span><h1>Aiming Off: Hit the Target by Aiming to One Side</h1>
+<p>Aiming off is a classic navigation technique. You deliberately aim slightly to one side of your target, so that when you hit a line feature you know exactly which way to turn. It is the best example of a principle that runs through all of AimOff: <b>smart aim beats lucky aim.</b></p></div></section>
+<section><div class="container layout"><article class="prose">
+<figure class="card" style="margin:0 0 20px"><svg viewBox="0 0 640 300" width="100%" role="img" aria-label="Diagram showing aiming off to one side of a target on a river">
+<rect width="640" height="300" fill="none"/><path d="M20 70 C 160 40, 300 100, 420 60 S 620 70, 630 50" stroke="#3aa0ff" stroke-width="10" fill="none" stroke-linecap="round"/>
+<text x="500" y="40" fill="#3aa0ff" font-size="16" font-family="Inter">River (line feature)</text>
+<circle cx="330" cy="82" r="13" fill="none" stroke="#ff4d6d" stroke-width="4"/><text x="300" y="120" fill="#ff4d6d" font-size="15" font-family="Inter">Target (bridge)</text>
+<circle cx="320" cy="270" r="8" fill="#22e3c4"/><text x="335" y="276" fill="#22e3c4" font-size="15" font-family="Inter">You</text>
+<line x1="320" y1="270" x2="330" y2="95" stroke="#93a1bf" stroke-dasharray="6 6" stroke-width="2"/>
+<line x1="320" y1="270" x2="250" y2="78" stroke="#22e3c4" stroke-width="3"/>
+<path d="M250 78 C 280 84, 300 86, 316 84" stroke="#ffc145" stroke-width="3" fill="none" marker-end="url(#a)"/>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#ffc145"/></marker></defs>
+<path d="M300 210 L 270 85 M 340 210 L 380 85" stroke="#93a1bf" stroke-opacity=".35" stroke-width="1.5"/>
+<text x="20" y="200" fill="#93a1bf" font-size="14" font-family="Inter">Dashed = direct bearing. Error cone means you</text><text x="20" y="218" fill="#93a1bf" font-size="14" font-family="Inter">might hit the river left OR right of the bridge.</text>
+<text x="20" y="250" fill="#22e3c4" font-size="14" font-family="Inter">Solid = aim off left → you KNOW to turn right.</text></svg></figure>
+
+<h2>Why it works</h2><p>No compass bearing is perfect. Over 500 m, a 5° error puts you about 44 m left <i>or</i> right of the target, and on arrival you do not know which. By aiming off by more than your error, say 10°, you guarantee you hit the line feature on one known side. Then you follow it (a “handrail”) straight to the target.</p>
+
+<h2>Aiming-off calculator</h2>
+<form class="tool" id="ao-form" onsubmit="return false"><div class="grid g3">
+<div class="field"><label for="ao-dist">Leg distance (m)</label><input id="ao-dist" type="number" value="500"></div>
+<div class="field"><label for="ao-ang">Aim-off angle (°)</label><input id="ao-ang" type="number" value="10"></div>
+<div class="field"><label for="ao-err">Expected bearing error (± °)</label><input id="ao-err" type="number" value="5"></div></div>
+<div class="hud"><div><b id="ao-off">—</b><span>Sideways offset at the line</span></div><div><b id="ao-cone">—</b><span>Uncertainty without aiming off</span></div></div>
+<p id="ao-verdict" class="small"></p><p class="muted small">Offset = distance × tan(angle). Pace-count the offset back along the line feature.</p></form>
+
+<h2>Step by step</h2><ol><li>Identify a <b>line feature</b> that runs across your route and passes through or near the target: a stream, wall, fence, path or ridge.</li>
+<li>Take the direct bearing, then <b>add or subtract 8–10°</b> towards the side that gives the easiest or safest walk.</li>
+<li>Travel on the new bearing, counting paces.</li><li>When you hit the line feature, <b>turn towards the target</b>. You already know the direction.</li><li>Follow the line feature, using a <b>catching feature</b> beyond the target as a backstop.</li></ol>
+
+<h2>Common mistakes</h2><ul><li>Aiming off by less than your error, which brings back the 50/50 guess.</li><li>Choosing a line feature that bends sharply near the target.</li><li>Forgetting that the offset grows with distance. Re-check it with the calculator.</li><li>Not having a catching feature, so you walk straight past the target along the line.</li></ul>
+<div class="ad-slot" data-slot="">Advertisement</div>
+<h2>Related techniques</h2><div class="grid g3"><div class="card"><h3>Handrails</h3><p class="muted small">Linear features you follow, such as paths, streams and fences.</p></div><div class="card"><h3>Attack points</h3><p class="muted small">An obvious feature near the control to navigate from precisely.</p></div><div class="card"><h3>Catching features</h3><p class="muted small">Something beyond the target that tells you that you have overshot.</p></div></div>
+
+<h2>Watch: aiming off explained</h2><div class="grid g2"><div class="yt" data-id="PbIoD1gzyeg" data-title="Orienteering Techniques: Aiming Off"></div><div class="yt" data-id="oneUIiYkwHg" data-title="Aiming Off — Think Fast, Run Hard, Go Orienteering"></div></div>
+<p class="muted small">Videos are embedded through YouTube and belong to their creators.</p>
+
+<h2>Aiming off beyond navigation</h2><p>In target sports, “aiming off” means holding to one side of the mark to allow for wind or a moving target. In games, it is <a href="guides.html#leading">leading</a> a target with a projectile weapon. The mindset is the same: <b>expect error, then put it where it helps you.</b></p>
+<h2>FAQ</h2><details><summary>What is aiming off in orienteering?</summary><p>Aiming off means deliberately setting your bearing a few degrees to one side of a target that sits on a line feature, such as a path junction on a stream. When you reach the line feature you know which way to turn, instead of guessing.</p></details><details><summary>How many degrees should I aim off?</summary><p>More than your expected compass error. Most walkers and runners have ±3–7° of error, so 8–10° works well. The calculator shows the sideways offset this creates over your leg distance.</p></details><details><summary>Is aiming off the same as an attack point?</summary><p>No. An attack point is an easy-to-find feature near the control that you navigate to first. A catching feature stops you if you overshoot. Aiming off works with a line feature you know you will hit.</p></details><details><summary>Does aiming off apply to shooting and archery?</summary><p>The phrase is also used for deliberately aiming to one side of a target to allow for wind or for a moving target. The principle is the same: plan for error instead of hoping it will not happen.</p></details>
+</article><aside class="sidebar"><div class="ad-slot" data-slot="" style="min-height:250px">Advertisement</div><div class="card"><h3>Outdoor & navigation brands</h3><p class="muted small">Sponsor this guide, which ranks for navigation-skills searches.</p><a class="btn btn-secondary btn-block" href="advertise.html">Sponsor</a></div>
+<div class="card"><h3>Clubs & instructors</h3><p class="muted small">Get listed and receive student enquiries.</p><a class="btn btn-primary btn-block" href="coaching.html#partners">List your club</a></div></aside>
+</div></section>
