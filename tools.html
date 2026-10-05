@@ -1,0 +1,44 @@
+---
+layout: default0
+title: |-
+  Aim Tools — eDPI, cm/360, FOV, Crosshair Generator, Mouse Tests | AimOff
+description: |-
+  Free aim tools: eDPI and cm/360 calculators, FOV converter, crosshair generator, DPI analyzer, polling rate tester and double-click tester.
+canon: |-
+  https://aimoff.com/tools.html
+robots: |-
+  <meta name="robots" content="index,follow,max-image-preview:large">
+schema: |-
+  [{"@context": "https://schema.org", "@type": "WebSite", "name": "AimOff", "url": "https://aimoff.com/", "potentialAction": {"@type": "SearchAction", "target": "https://aimoff.com/guides.html?q={search_term_string}", "query-input": "required name=search_term_string"}}, {"@context": "https://schema.org", "@type": "Organization", "name": "AimOff.com", "url": "https://aimoff.com/", "logo": "https://aimoff.com/assets/img/icon-512.png"}]
+active: |-
+  -
+scripts: |-
+  <script src="assets/js/tools.js" defer></script>
+sticky: |-
+  <div class="sticky-cta"><a class="btn btn-primary btn-sm" href="coaching.html">🎯 Free Aim Assessment</a></div>
+---
+<section class="page-hero"><div class="container"><span class="eyebrow">Free utilities</span><h1>Aim Tools</h1>
+<p>Calculators and testers for dialling in your setup: eDPI, cm/360, FOV conversion, a crosshair generator, and mouse diagnostics (DPI analyzer, polling rate, double-click).</p>
+<div class="chips"><a class="tag" href="#edpi">eDPI & cm/360</a><a class="tag" href="#fov">FOV</a><a class="tag" href="#crosshair">Crosshair</a><a class="tag" href="#mouse">Mouse tests</a></div></div></section>
+<section><div class="container">
+<h2 id="edpi">eDPI & cm/360 calculators</h2><div class="grid g2">
+<form class="tool" id="edpi-form" onsubmit="return false"><h3>eDPI calculator</h3><div class="row"><div class="field"><label for="e-sens">In-game sensitivity</label><input id="e-sens" type="number" step="any" value="0.4"></div><div class="field"><label for="e-dpi">Mouse DPI</label><input id="e-dpi" type="number" value="800"></div></div><div class="out">eDPI: <b id="e-out">—</b></div></form>
+<form class="tool" id="cm-form" onsubmit="return false"><h3>cm/360 calculator</h3><div class="field"><label for="cm-game">Game</label><select id="cm-game"></select></div><div class="row"><div class="field"><label for="cm-sens">Sensitivity</label><input id="cm-sens" type="number" step="any" value="1"></div><div class="field"><label for="cm-dpi">DPI</label><input id="cm-dpi" type="number" value="800"></div></div><div class="out"><b id="cm-out">—</b></div></form>
+</div><div class="ad-slot" data-slot="">Advertisement</div>
+<h2 id="fov">FOV converter</h2><form class="tool" id="fov-form" onsubmit="return false"><div class="grid g3"><div class="field"><label for="fov-v">Vertical FOV (°)</label><input id="fov-v" type="number" step="any" value="73.74"></div><div class="field"><label for="fov-w">Aspect width</label><input id="fov-w" type="number" value="16"></div><div class="field"><label for="fov-h">Aspect height</label><input id="fov-h" type="number" value="9"></div></div><div class="out">Result: <b id="fov-out">—</b></div><p class="muted small">Formula: hFOV = 2·atan(tan(vFOV/2)·aspect). Use it to compare games that specify FOV differently.</p></form>
+<h2 id="crosshair" class="mt">Crosshair generator</h2>
+<div class="grid g2"><form class="tool" id="xh-form" onsubmit="return false">
+<div class="row"><div class="field"><label for="xh-color">Colour</label><input id="xh-color" type="color" value="#00ff6a"></div><div class="field"><label for="xh-bg">Preview background</label><select id="xh-bg"><option value="#3a4a5c">Concrete</option><option value="#c9b38a">Sand</option><option value="#2c4a2a">Foliage</option><option value="#e8eefc">Sky</option><option value="#0b0f18">Night</option></select></div></div>
+<div class="row"><div class="field"><label for="xh-len">Line length <span class="muted">(px)</span></label><input id="xh-len" type="range" min="0" max="12" value="4"></div><div class="field"><label for="xh-th">Thickness</label><input id="xh-th" type="range" min="1" max="5" value="2"></div></div>
+<div class="field"><label for="xh-gap">Gap</label><input id="xh-gap" type="range" min="0" max="10" value="2"></div>
+<div class="chips"><label class="check"><input type="checkbox" id="xh-dot"> Centre dot</label><label class="check"><input type="checkbox" id="xh-ol" checked> Outline</label><label class="check"><input type="checkbox" id="xh-t"> T-style</label></div>
+<div class="field mt"><label for="xh-json">Your settings (save or share)</label><textarea id="xh-json" readonly style="min-height:70px"></textarea></div>
+<button type="button" class="btn btn-secondary btn-sm" id="xh-rand">🎲 Randomize</button> <button type="button" class="btn btn-primary btn-sm" id="xh-copy">Copy settings</button></form>
+<div class="tool"><canvas id="xh-canvas" width="480" height="320" style="width:100%;border-radius:12px"></canvas><p class="muted small">Preview at 4× zoom. Enter these values in your game’s crosshair menu. Pick a colour that contrasts with the map: green or cyan for most maps, magenta for foliage.</p></div></div>
+<div class="ad-slot" data-slot="">Advertisement</div>
+<h2 id="mouse" class="mt">Mouse tests</h2><div class="grid g3">
+<div class="tool"><h3>Polling rate</h3><div id="poll-area" class="react-pad idle" style="aspect-ratio:4/3;font-size:1.1rem">Move your mouse in fast circles here</div><div class="hud"><div><b id="poll-out">0 Hz</b><span>Live</span></div><div><b id="poll-max">0 Hz</b><span>Peak</span></div></div><p class="muted small">Browsers can cap readings at your monitor refresh rate; Chromium browsers report the most accurate values.</p></div>
+<div class="tool"><h3>DPI analyzer</h3><div class="row"><div class="field"><label for="dpi-dist">Distance</label><input id="dpi-dist" type="number" value="10"></div><div class="field"><label for="dpi-unit">Unit</label><select id="dpi-unit"><option value="cm">cm</option><option value="in">inches</option></select></div></div>
+<div id="dpi-area" class="react-pad idle" style="aspect-ratio:4/2;font-size:1rem">Click to start, move the distance to the right, click again</div><div class="out"><b id="dpi-out">—</b></div></div>
+<div class="tool"><h3>Double-click tester</h3><button id="dc-btn" class="react-pad idle" style="aspect-ratio:4/3;width:100%;border:0;font-size:1.1rem">Click here with left & right buttons</button><p class="small" id="dc-out">Clicks under 80 ms apart are flagged as possible switch chatter.</p></div>
+</div></div></section>

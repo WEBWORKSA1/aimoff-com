@@ -1,0 +1,34 @@
+---
+layout: default0
+title: |-
+  Reaction Time Test — Average, Percentile & Tier | AimOff
+description: |-
+  Test your reaction time in milliseconds. 5-attempt average, percentile vs. the population, tier and tips to get faster. Free and instant.
+canon: |-
+  https://aimoff.com/reaction-test.html
+robots: |-
+  <meta name="robots" content="index,follow,max-image-preview:large">
+schema: |-
+  [{"@context": "https://schema.org", "@type": "WebSite", "name": "AimOff", "url": "https://aimoff.com/", "potentialAction": {"@type": "SearchAction", "target": "https://aimoff.com/guides.html?q={search_term_string}", "query-input": "required name=search_term_string"}}, {"@context": "https://schema.org", "@type": "Organization", "name": "AimOff.com", "url": "https://aimoff.com/", "logo": "https://aimoff.com/assets/img/icon-512.png"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a good reaction time?", "acceptedAnswer": {"@type": "Answer", "text": "For a visual click test the average human score is roughly 250–280 ms. Under 200 ms is excellent and typical of trained competitive players; under 150 ms usually means you anticipated the signal."}}, {"@type": "Question", "name": "Why is my score different on another device?", "acceptedAnswer": {"@type": "Answer", "text": "Monitor refresh rate, input lag, mouse polling rate and browser load all add milliseconds. A 60 Hz screen can add up to ~16 ms compared with 240 Hz."}}, {"@type": "Question", "name": "Can I improve my reaction time?", "acceptedAnswer": {"@type": "Answer", "text": "Partly. Sleep, warm-ups, caffeine timing and hardware improvements help, and practice reduces decision time in games. Pure visual reaction has a biological floor around 100–150 ms."}}]}, {"@context": "https://schema.org", "@type": "WebApplication", "name": "Reaction Time Test", "url": "https://aimoff.com/reaction-test.html", "applicationCategory": "GameApplication", "operatingSystem": "Any (web browser)", "description": "Free reaction time test", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}]
+active: |-
+  -
+scripts: |-
+  <script src="assets/js/tools.js" defer></script>
+sticky: |-
+  <div class="sticky-cta"><a class="btn btn-primary btn-sm" href="coaching.html">🎯 Free Aim Assessment</a></div>
+---
+<section class="page-hero"><div class="container"><span class="eyebrow">Human-benchmark style test</span><h1>Reaction Time Test</h1>
+<p>Click (or press <kbd>Space</kbd>) the moment the box turns green. We average 5 attempts, then show your percentile and tier.</p></div></section>
+<section><div class="container layout"><div>
+<div class="tool"><div id="react-pad" class="react-pad idle" role="button" tabindex="0">Click to start<span class="small" style="font-family:var(--font);font-weight:500">Wait for green, then click as fast as you can</span></div>
+<div class="hud"><div><b id="react-pb">—</b><span>Best average</span></div><div style="flex:1"><b id="react-runs" style="font-size:1rem">—</b><span>Last 5 attempts</span></div></div>
+<button class="btn btn-secondary btn-sm" id="react-share">Share my result</button> <a class="btn btn-gold btn-sm" href="contests.html?mode=reaction#enter">Submit to contest</a></div>
+<div class="ad-slot" data-slot="">Advertisement</div>
+<div class="prose"><h2>Reaction time benchmarks</h2>
+<div class="table-wrap"><table><thead><tr><th>Average</th><th>Tier</th><th>What it means</th></tr></thead><tbody>
+<tr><td>&lt; 180 ms</td><td>Superhuman</td><td>Exceptional, or you are anticipating</td></tr><tr><td>180–210 ms</td><td>Pro-level</td><td>Typical of trained esports players</td></tr>
+<tr><td>210–240 ms</td><td>Elite</td><td>Very fast</td></tr><tr><td>240–280 ms</td><td>Above average</td><td>Better than most people</td></tr><tr><td>280–330 ms</td><td>Average</td><td>Normal human range</td></tr><tr><td>&gt; 330 ms</td><td>Warming up</td><td>Check your setup, sleep and focus</td></tr></tbody></table></div>
+<h2>How to get a faster score</h2><ul><li>Use a wired mouse and the highest refresh rate your monitor supports.</li><li>Close heavy browser tabs. Background load adds jitter.</li><li>Rest your finger lightly on the button, and focus on the centre of the box rather than the edges.</li><li>Warm up with 2 minutes of <a href="train.html?mode=reflex">Reflex mode</a>.</li></ul>
+<h2>FAQ</h2><details><summary>What is a good reaction time?</summary><p>For a visual click test the average human score is roughly 250–280 ms. Under 200 ms is excellent and typical of trained competitive players; under 150 ms usually means you anticipated the signal.</p></details><details><summary>Why is my score different on another device?</summary><p>Monitor refresh rate, input lag, mouse polling rate and browser load all add milliseconds. A 60 Hz screen can add up to ~16 ms compared with 240 Hz.</p></details><details><summary>Can I improve my reaction time?</summary><p>Partly. Sleep, warm-ups, caffeine timing and hardware improvements help, and practice reduces decision time in games. Pure visual reaction has a biological floor around 100–150 ms.</p></details></div></div>
+<aside class="sidebar"><div class="ad-slot" data-slot="" style="min-height:250px">Advertisement</div><div class="card"><h3>Next test</h3><a class="btn btn-primary btn-block" href="cps-test.html">CPS Test →</a><a class="btn btn-secondary btn-block mt" href="train.html">Aim Trainer →</a></div></aside>
+</div></section>
