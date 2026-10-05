@@ -250,22 +250,29 @@ TOOLS_PAGE = f'''<section class="page-hero"><div class="container"><span class="
 <div class="tool"><h3>Double-click tester</h3><button id="dc-btn" class="react-pad idle" style="aspect-ratio:4/3;width:100%;border:0;font-size:1.1rem">Click here with left & right buttons</button><p class="small" id="dc-out">Clicks under 80 ms apart are flagged as possible switch chatter.</p></div>
 </div></div></section>'''
 
-def conv_page(a, b):
+def conv_values(a, b):
     na, ya = GAMES[a]; nb, yb = GAMES[b]
     m = ya / yb
-    rows = ''.join(f'<tr><td>{s}</td><td>{s * m:.3f}</td><td>{360 / (ya * s * 800) * 2.54:.1f} cm</td></tr>' for s in ([0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.8] if a == 'valorant' else [5, 6, 7, 8, 10, 12, 15] if a == 'fortnite' else [0.8, 1, 1.2, 1.5, 1.8, 2, 2.5, 3, 4, 5]))
+    rows = ''.join(f'<tr><td>{s}</td><td>{s * m:.3f}</td><td>{360 / (ya * s * 800) * 2.54:.1f} cm</td></tr>' for s in ([0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.8] if a == 'valorant' else [5, 6, 7, 8, 10, 12, 15] if a == 'fortnite' else [3, 4, 5, 6, 7, 8, 10, 12] if a in ('cod', 'overwatch2') else [0.8, 1, 1.2, 1.5, 1.8, 2, 2.5, 3, 4, 5]))
+    return dict(a=a, b=b, na=na, nb=nb, ya=str(ya), yb=str(yb), m=f'{m:.4f}', rows=rows, nbplus=nb.replace(' ', '+'))
+
+LIQUID = {k: '{{ page.%s }}' % k for k in ['a', 'b', 'na', 'nb', 'ya', 'yb', 'm', 'rows', 'nbplus']}
+
+def conv_page(a, b, v=None):
+    v = v or conv_values(a, b)
+    a, b, na, nb, ya, yb, m, rows, nbplus = (v[k] for k in ['a', 'b', 'na', 'nb', 'ya', 'yb', 'm', 'rows', 'nbplus'])
     body = f'''<section class="page-hero"><div class="container"><span class="eyebrow">Sensitivity conversion</span><h1>{na} to {nb} Sensitivity Converter</h1>
-<p>Convert your {na} sensitivity to {nb} and keep the same cm/360. At equal DPI, multiply your {na} sensitivity by <b>{m:.4f}</b> to get your {nb} sensitivity.</p></div></section>
+<p>Convert your {na} sensitivity to {nb} and keep the same cm/360. At equal DPI, multiply your {na} sensitivity by <b>{m}</b> to get your {nb} sensitivity.</p></div></section>
 <section><div class="container layout"><div>{converter_widget(a, b)}{AD}
 <div class="prose"><h2>{na} → {nb} quick table (800 DPI)</h2><div class="table-wrap"><table><thead><tr><th>{na} sens</th><th>{nb} sens</th><th>cm/360</th></tr></thead><tbody>{rows}</tbody></table></div>
-<h2>How the {na} to {nb} conversion works</h2><p>{na} turns your view by {ya}° per mouse count at sensitivity 1; {nb} turns {yb}°. Dividing the two gives the multiplier {m:.4f}. If you change DPI as well, the converter above adjusts for it, so the physical distance per 360° stays identical.</p>
+<h2>How the {na} to {nb} conversion works</h2><p>{na} turns your view by {ya}° per mouse count at sensitivity 1; {nb} turns {yb}°. Dividing the two gives the multiplier {m}. If you change DPI as well, the converter above adjusts for it, so the physical distance per 360° stays identical.</p>
 <h3>After converting</h3><ol><li>Set the new value in {nb} and turn off mouse acceleration.</li><li>Play 2–3 short sessions; small adjustments of ±5% are normal because FOV makes speed <i>feel</i> different.</li><li>Lock it in with 10 minutes of <a href="{{R}}train.html?mode=tracking">Tracking</a> and <a href="{{R}}train.html?mode=flick">Flick</a> drills.</li></ol>
 <p class="muted small">Game names are trademarks of their owners; AimOff is not affiliated with them. Values are for hip-fire; verify scoped multipliers in-game.</p>
 <p><a href="{{R}}convert/{b}-to-{a}-sensitivity.html">Reverse: {nb} → {na}</a> · <a href="{{R}}convert/index.html">All conversions</a></p></div></div>
-<aside class="sidebar"><div class="ad-slot" data-slot="" style="min-height:250px">Advertisement</div><div class="card"><h3>Need a coach for {nb}?</h3><p class="muted small">Get a free assessment from a vetted coach.</p><a class="btn btn-primary btn-block" href="{{R}}coaching.html?game={nb.replace(' ', '+')}">Free assessment</a></div></aside>
+<aside class="sidebar"><div class="ad-slot" data-slot="" style="min-height:250px">Advertisement</div><div class="card"><h3>Need a coach for {nb}?</h3><p class="muted small">Get a free assessment from a vetted coach.</p><a class="btn btn-primary btn-block" href="{{R}}coaching.html?game={nbplus}">Free assessment</a></div></aside>
 </div></section>'''
     return dict(path=f'convert/{a}-to-{b}-sensitivity.html', title=f'{na} to {nb} Sensitivity Converter (cm/360 exact) | AimOff',
-                desc=f'Convert {na} sensitivity to {nb} instantly. Multiplier {m:.4f} at equal DPI, quick table, cm/360 and eDPI. Free, accurate, no signup.',
+                desc=f'Convert {na} sensitivity to {nb} instantly. Multiplier {m} at equal DPI, quick table, cm/360 and eDPI. Free, accurate, no signup.',
                 body=body, active='', scripts=['tools.js'], schema=tool_schema(f'{na} to {nb} sensitivity converter', f'convert/{a}-to-{b}-sensitivity.html', 'Free sensitivity converter'))
 
 def conversion_pages():
