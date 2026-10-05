@@ -1,0 +1,4 @@
+# GitHub Pages (Jekyll) config. Static .html pages have no front matter and are served as-is;
+# only convert/*.html stubs are rendered through _layouts/convert.html.
+exclude: [tools, README.md, STRATEGY.md, BUILD-PROMPT.md]
+plugins: []
