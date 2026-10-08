@@ -13,7 +13,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 # ---- Settings you will edit once ----------------------------------------
 SITE = 'https://aimoff.com'          # canonical domain
-ADSENSE_CLIENT = ''                   # e.g. 'ca-pub-1234567890123456' after AdSense approval
+ADSENSE_CLIENT = 'ca-pub-6620975821265271'  # Google AdSense publisher ID
 GA4_ID = ''                           # e.g. 'G-XXXXXXXXXX'
 SPONSOR_URL = 'https://web.works/contact'
 # --------------------------------------------------------------------------
@@ -176,7 +176,7 @@ def jekyll_main_pages():
         schema = [json.loads(html.split('<script type="application/ld+json">')[1].split('</script>')[0])][0]
         robots = '<meta name="robots" content="noindex">' if p.get('noindex') else '<meta name="robots" content="index,follow,max-image-preview:large">'
         fm = ('---\n' + f'layout: default{d}\n' + yaml_block('title', p['title']) + yaml_block('description', p['desc']) +
-              yaml_block('canon', canon) + yaml_block('robots', robots) + yaml_block('schema', json.dumps(schema)) +
+              yaml_block('canon', canon) + yaml_block('robots', robots) + yaml_block('schema', json.dumps(schema, ensure_ascii=False)) +
               yaml_block('active', p.get('active', '') or '-') + yaml_block('scripts', parts['sc'] or '') + yaml_block('sticky', parts['stick'] or '') + '---\n')
         body = p['body'].replace('{R}', rel(d))
         assert '{{' not in body and '{%' not in body, p['path']
