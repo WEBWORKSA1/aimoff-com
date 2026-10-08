@@ -1,3 +1,1 @@
-# AimOff.com ads.txt
-# After AdSense approval, replace this comment with the line Google gives you, e.g.:
-# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-6620975821265271, DIRECT, f08c47fec0942fa0

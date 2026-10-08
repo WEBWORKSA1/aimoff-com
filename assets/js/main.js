@@ -113,6 +113,8 @@
   ];
   document.querySelectorAll('.ad-slot').forEach(function (slot, n) {
     if (client && consent !== 'essential') {
+      // No ad-unit ID on this slot: remove the placeholder and let AdSense Auto ads place ads.
+      if (!slot.getAttribute('data-slot')) { slot.remove(); return; }
       slot.classList.add('has-ad');
       slot.innerHTML = '<div style="width:100%"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block" data-ad-client="' + client +
         '" data-ad-slot="' + (slot.getAttribute('data-slot') || '') + '" data-ad-format="auto" data-full-width-responsive="true"></ins></div>';
